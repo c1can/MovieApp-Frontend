@@ -8,12 +8,20 @@ import './index.css'
 
 
 const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        bg: '#0d1b2a',
+        color: "white"
+      }
+    }
+  },
   colors: {
     main: '#0d1b2a'
   },
   fonts: {
     body: `'Bebas Neue'`
-  },
+  }
 })
 
 ReactDOM.createRoot(document.getElementById('root')).render(
