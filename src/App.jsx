@@ -1,14 +1,10 @@
-import Header from "./components/Header"
-import MoviesBanner from "./components/Banner"
-import { Cartelera } from "./components/Cartelera"
+import { Routes } from "./routes/routes"
 
 function App() {
 
   return (
     <div className="App">
-      <Header/>
-      <MoviesBanner />
-      <Cartelera />
+      <Routes />
     </div>
   )
 }

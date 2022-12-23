@@ -11,6 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, EditIcon } from "@chakra-ui/icons";
+import { Link } from "wouter"
 
 function Header() {
   return (
@@ -21,9 +22,11 @@ function Header() {
         display="flex"
         justifyContent="space-between"
       >
-        <Text fontWeight="bold" fontSize="3xl" color="white">
-          CinemaGT
-        </Text>
+        <Link to="/">
+            <Text fontWeight="bold" fontSize="3xl" color="white" cursor={"pointer"}>
+               CinemaGT
+            </Text>
+        </Link>
 
         <Stack direction="row" spacing="5" alignItems="center">
             <Button bg="white">
