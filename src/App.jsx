@@ -1,5 +1,6 @@
 import Header from "./components/Header"
 import MoviesBanner from "./components/Banner"
+import { Cartelera } from "./components/Cartelera"
 
 function App() {
 
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
       <Header/>
       <MoviesBanner />
+      <Cartelera />
     </div>
   )
 }

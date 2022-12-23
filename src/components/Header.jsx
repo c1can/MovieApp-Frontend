@@ -14,20 +14,20 @@ import { ChevronDownIcon, EditIcon } from "@chakra-ui/icons";
 
 function Header() {
   return (
-    <Box as={"nav"} w={"100%"} bg="brand.main">
+    <Box as={"nav"} w={"100%"} bg="main" borderBottom="3px solid white">
       <Container
         maxW={"container.xl"}
         py="5"
         display="flex"
         justifyContent="space-between"
       >
-        <Text fontWeight="bold" fontSize="2xl" color="white">
+        <Text fontWeight="bold" fontSize="3xl" color="white">
           CinemaGT
         </Text>
 
         <Stack direction="row" spacing="5" alignItems="center">
             <Button bg="white">
-                <Text fontWeight="bold" color="black">Mis Reservaciones</Text>
+                <Text fontSize="xl" fontWeight="light" color="black">Mis Reservaciones</Text>
             </Button>
             <Button bg="transparent">
                 <EditIcon color="white"/>
@@ -48,7 +48,7 @@ function Header() {
                 borderColor="white"
               />
             </MenuButton>
-            <MenuList mt={5} bg="brand.main">
+            <MenuList mt={5} bg="main">
               <Stack alignItems="center" divider={<StackDivider />} spacing="4">
                 <Stack alignItems="center">
                   <Avatar
@@ -59,15 +59,15 @@ function Header() {
                     border="2px"
                     borderColor="white"
                   />
-                  <Text fontWeight="bold" my={3} color="white">
+                  <Text fontWeight="light" my={3} color="white" fontSize="2xl">
                     Admin
                   </Text>
-                  <Text fontWeight="bold" my="3" color="white">
+                  <Text fontWeight="light" my="3" color="white" fontSize="2xl">
                     Creditos: 300
                   </Text>
                 </Stack>
 
-                <Button bg="white" color="black">Cerrar Sesion</Button>
+                <Button fontSize="xl" fontWeight="light" bg="white" color="black">Cerrar Sesion</Button>
               </Stack>
             </MenuList>
           </Menu>

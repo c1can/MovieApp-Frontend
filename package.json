@@ -13,6 +13,7 @@
     "@chakra-ui/react": "^2.4.4",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@fontsource/bebas-neue": "^4.5.9",
     "chakra-ui-carousel": "^1.0.6",
     "framer-motion": "^7.10.3",
     "react": "^18.2.0",
