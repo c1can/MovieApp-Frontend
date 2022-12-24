@@ -1,8 +1,5 @@
-const url = "https://movieapp-backend-production.up.railway.app/api/cartelera"
-
-
 export function getCartelera() {
-    return fetch(url)
+    return fetch("https://movieapp-backend-production.up.railway.app/api/cartelera")
         .then(res => res.json())
         .then(response => response)
 } 

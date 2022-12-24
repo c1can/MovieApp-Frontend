@@ -7,7 +7,7 @@ export function Routes() {
     return (
         <>
             <Route path="/" component={Home}></Route>
-            <Route path="/movie/:name">{params => <BuyTicket param={params}/>}</Route>
+            <Route path="/movie/:id">{params => <BuyTicket param={params}/>}</Route>
         </>
     )
 }
