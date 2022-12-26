@@ -33,7 +33,9 @@ function Header() {
                 <Text fontSize="xl" fontWeight="light" color="black">Mis Reservaciones</Text>
             </Button>
             <Button bg="transparent">
+              <Link to="/register">
                 <EditIcon color="white"/>
+              </Link>
             </Button>
           <Menu>
             <MenuButton
