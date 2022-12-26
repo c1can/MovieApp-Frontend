@@ -32,11 +32,11 @@ function Header() {
             <Button bg="white">
                 <Text fontSize="xl" fontWeight="light" color="black">Mis Reservaciones</Text>
             </Button>
-            <Button bg="transparent">
-              <Link to="/register">
-                <EditIcon color="white"/>
-              </Link>
-            </Button>
+            <Link to="/register">
+                <Button bg="transparent">
+                 <EditIcon color="white"/>
+                </Button>
+            </Link>
           <Menu>
             <MenuButton
               as={Button}

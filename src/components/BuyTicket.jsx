@@ -18,8 +18,6 @@ export function BuyTicket({ param }) {
   let filas = [...Array(5)]
   let columnas = [...Array(10)]
 
-  console.log(filas)
-
   const { movies } = useMoviesContext()
   const filteredMovies = movies.filter((movie) => movie._id == id)
 
