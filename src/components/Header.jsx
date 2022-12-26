@@ -9,11 +9,17 @@ import {
   MenuList,
   StackDivider,
   Text,
+  Flex,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, EditIcon } from "@chakra-ui/icons";
 import { Link } from "wouter"
+import { useUserContext } from "../hooks/useUserContext";
 
 function Header() {
+  
+  const { globalUser } = useUserContext()
+  const { nombre, creditos, correo } = globalUser
+
   return (
     <Box as={"nav"} w={"100%"} bg="main" borderBottom="3px solid white">
       <Container
@@ -48,7 +54,7 @@ function Header() {
                 color="white"
                 bg="transparent"
                 size={"sm"}
-                name={"ADMIN"}
+                name={nombre}
                 border="2px"
                 borderColor="white"
               />
@@ -58,17 +64,22 @@ function Header() {
                 <Stack alignItems="center">
                   <Avatar
                     size={"xl"}
-                    name={"ADMIN"}
+                    name={nombre}
                     bg="transparent"
                     color="white"
                     border="2px"
                     borderColor="white"
                   />
-                  <Text fontWeight="light" my={3} color="white" fontSize="2xl">
-                    Admin
+                      <Text fontWeight="light" my={3} color="white" fontSize="2xl">
+                          {nombre}
+                      </Text>
+
+                  <Text fontWeight="light" my="3" color="white" fontSize="xl">
+                    {correo}
                   </Text>
+                  
                   <Text fontWeight="light" my="3" color="white" fontSize="2xl">
-                    Creditos: 300
+                    Creditos: {creditos}
                   </Text>
                 </Stack>
 

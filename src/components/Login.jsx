@@ -5,16 +5,70 @@ import {
   FormControl,
   FormLabel,
   Input,
-  FormHelperText,
   Button,
   Center,
   Text,
   Flex,
+  useToast,
 } from "@chakra-ui/react";
-import { Link } from "wouter";
+import { useState } from "react";
+import { Link, useLocation } from "wouter";
 import Header from "./Header";
+import { useUserContext } from "../hooks/useUserContext";
 
 export function Login() {
+
+  const [user, setUser] = useState({
+      correo: "",
+      contraseña: ""
+  })
+
+  const { globalUser, setGlobalUser } = useUserContext()
+  
+  const toast = useToast()
+  const [path, setPath] = useLocation()
+
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value
+    })
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    fetch("https://movieapp-backend-production.up.railway.app/api/login", {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then(response => response.json())
+      .then(res => {
+        if(res.error) {
+          return toast({
+            title: "Hubo un error",
+            description: res.error,
+            status: Object.keys(res)[0],
+            isClosable: true
+          })
+        }
+        setGlobalUser({
+          ...globalUser,
+          id_: res._id,
+          nombre: res.nombre,
+          apellido: res.apellido,
+          correo: res.correo,
+          creditos: res.creditos,
+          rol: res.rol
+        })
+        console.log(res)
+        setPath("/")
+      })
+      .catch(error => console.log(error))
+  }
 
   return (
 
@@ -36,6 +90,7 @@ export function Login() {
                 display="flex"
                 flexDirection="column"
                 gap="20px"
+                onSubmit={handleSubmit}
                 >
                <FormControl>
                 <FormLabel color="main" fontFamily="heading" fontWeight="bold">Correo Electrónico</FormLabel>
@@ -43,10 +98,11 @@ export function Login() {
                     variant="filled"
                     type={"email"}
                     placeholder="usuario@gmail.com"
-                    id="email"
-                    name="email"
+                    id="correo"
+                    name="correo"
                     color="main"
                     fontFamily="heading"
+                    onChange={handleChange}
                     ></Input>
                 </FormControl>
                 <FormControl>
@@ -55,10 +111,11 @@ export function Login() {
                     variant="filled"
                     type={"password"}
                     placeholder="*********"
-                    id="password"
-                    name="password"
+                    id="contraseña"
+                    name="contraseña"
                     color="main"
                     fontFamily="heading"
+                    onChange={handleChange}
                     ></Input>
                 </FormControl>
 
