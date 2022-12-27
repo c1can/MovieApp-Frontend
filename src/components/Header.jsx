@@ -35,14 +35,27 @@ function Header() {
         </Link>
 
         <Stack direction="row" spacing="5" alignItems="center">
-            <Button bg="white">
-                <Text fontSize="xl" fontWeight="light" color="black">Mis Reservaciones</Text>
-            </Button>
-            <Link to="/register">
-                <Button bg="transparent">
-                 <EditIcon color="white"/>
+          {
+            globalUser.rol == "admin"
+             ?
+             <Link to="/admin">
+               <Button bg="white">
+                <Text fontSize="xl" fontWeight="light" color="black">Admin</Text>
+               </Button>
+             </Link>
+             : 
+             <>
+                <Button bg="white">
+                  <Text fontSize="xl" fontWeight="light" color="black">Mis Reservaciones</Text>
                 </Button>
-            </Link>
+                <Link to="/register">
+                  <Button bg="transparent">
+                  <EditIcon color="white"/>
+                  </Button>
+                </Link>
+             </>
+          }
+            
           <Menu>
             <MenuButton
               as={Button}
