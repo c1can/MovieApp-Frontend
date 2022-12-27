@@ -55,15 +55,8 @@ export function Login() {
             isClosable: true
           })
         }
-        setGlobalUser({
-          ...globalUser,
-          id_: res._id,
-          nombre: res.nombre,
-          apellido: res.apellido,
-          correo: res.correo,
-          creditos: res.creditos,
-          rol: res.rol
-        })
+        
+        window.localStorage.setItem("user", JSON.stringify(res))
         console.log(res)
         setPath("/")
       })
