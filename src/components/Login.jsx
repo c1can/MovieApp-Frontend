@@ -57,7 +57,6 @@ export function Login() {
         }
         
         window.localStorage.setItem("user", JSON.stringify(res))
-        console.log(res)
         setPath("/")
       })
       .catch(error => console.log(error))

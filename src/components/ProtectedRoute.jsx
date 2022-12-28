@@ -1,11 +1,12 @@
 import { Redirect } from "wouter";
-import { useUserContext } from "../hooks/useUserContext";
+import { useStorage } from "../hooks/useStorage";
 
 export function ProtectedRoute({children}) {
-    const { globalUser } = useUserContext()
+    const { getStorage } = useStorage()
+    const response = getStorage()
 
         {
-            return globalUser.rol !== "admin" ? <Redirect to="/"/> : children
+            return response.rol !== "admin" ? <Redirect to="/"/> : children
         }
 
 }

@@ -13,12 +13,19 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon, EditIcon } from "@chakra-ui/icons";
 import { Link } from "wouter"
-import { useUserContext } from "../hooks/useUserContext";
+import { useStorage } from "../hooks/useStorage";
 
 function Header() {
   
-  const { globalUser } = useUserContext()
-  const { nombre, creditos, correo } = globalUser
+  //TO DO: Arreglar esto para que no se renderize innecesariamente
+  const { getStorage } = useStorage()
+  const response = getStorage()
+  const { nombre, creditos, correo } = response
+
+  const closeSession = () => {
+    window.localStorage.clear()
+    window.location.reload(false)
+  }
 
   return (
     <Box as={"nav"} w={"100%"} bg="main" borderBottom="3px solid white">
@@ -36,7 +43,7 @@ function Header() {
 
         <Stack direction="row" spacing="5" alignItems="center">
           {
-            globalUser.rol == "admin"
+            response.rol == "admin"
              ?
              <Link to="/admin">
                <Button bg="white">
@@ -96,7 +103,7 @@ function Header() {
                   </Text>
                 </Stack>
 
-                <Button fontSize="xl" fontWeight="light" bg="white" color="black">Cerrar Sesion</Button>
+                <Button fontSize="xl" fontWeight="light" bg="white" color="black" onClick={closeSession}>Cerrar Sesion</Button>
               </Stack>
             </MenuList>
           </Menu>
