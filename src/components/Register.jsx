@@ -14,6 +14,7 @@ import {
 import { useState } from "react";
 import { Link } from "wouter";
 import { useLocation } from "wouter";
+import api from "../variables/api";
 import Header from "./Header";
 
 export function Register() {
@@ -36,7 +37,7 @@ export function Register() {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch("https://movieapp-backend-production.up.railway.app/api/register", {
+        fetch(`${api}/register`, {
             method: 'POST',
             mode: 'cors',
             headers: {

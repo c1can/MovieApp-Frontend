@@ -8,9 +8,13 @@ import {
   VStack,
   Badge,
   Center,
+  useToast,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { useMoviesContext } from "../hooks/useMoviesContext";
+import { useStorage } from "../hooks/useStorage";
 import Header from "./Header";
+import { PopOver } from "./PopOver";
 
 export function BuyTicket({ param }) {
   const { id } = param;
@@ -18,8 +22,24 @@ export function BuyTicket({ param }) {
   let filas = [...Array(5)]
   let columnas = [...Array(10)]
 
+    
+  const { getStorage } = useStorage()
+  const user = getStorage()
+
+  const toast = useToast()
+
   const { movies } = useMoviesContext()
   const filteredMovies = movies.filter((movie) => movie._id == id)
+
+  const handleButton = () => {
+     if(user.creditos < filteredMovies[0].precio) {
+       return toast({
+        title: "Creditos Insuficientes",
+        status: "error",
+        isClosable: true
+       })
+     }
+  }
 
   return (
     <>
@@ -50,9 +70,14 @@ export function BuyTicket({ param }) {
                     </Box>
                 </Box>
 
-                <Button bg="white">
-                    <Text fontSize="xl" fontWeight="light" color="black">Adquiere tu boleto</Text>
-                </Button>
+                {
+                  user.rol == 'anonimo'
+                    ? <PopOver />
+                    :
+                    <Button bg="white" onClick={handleButton}>
+                     <Text fontSize="xl" fontWeight="light" color="black">Adquiere tu boleto</Text>
+                    </Button>
+                }
             </VStack>
           ))}
 

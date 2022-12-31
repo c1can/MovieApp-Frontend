@@ -15,6 +15,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import Header from "./Header";
 import { useUserContext } from "../hooks/useUserContext";
+import api from "../variables/api";
 
 export function Login() {
 
@@ -37,7 +38,7 @@ export function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    fetch("https://movieapp-backend-production.up.railway.app/api/login", {
+    fetch(`${api}/login`, {
       method: 'POST',
       mode: 'cors',
       headers: {

@@ -22,6 +22,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useStorage } from "../hooks/useStorage";
+import api from "../variables/api";
 import Header from "./Header";
 
 export function Admin() {
@@ -45,7 +46,7 @@ export function Admin() {
   const logUser = getStorage();
   const { token } = logUser;
   useEffect(() => {
-    fetch("https://movieapp-backend-production.up.railway.app/api/clientes", {
+    fetch(`${api}/clientes`, {
       method: "GET",
       headers: new Headers({
         "x-access-token": token,
@@ -75,7 +76,7 @@ export function Admin() {
     console.log(clientId);
     const id = clientId;
     fetch(
-      `https://movieapp-backend-production.up.railway.app/api/clientes/${id}`,
+      `${api}/clientes/${id}`,
       {
         method: "PUT",
         mode: "cors",
@@ -117,7 +118,7 @@ export function Admin() {
   const handleCarteleraSubmit=(e) => {
     e.preventDefault()
     console.log(newMovie)
-    fetch("https://movieapp-backend-production.up.railway.app/api/cartelera", {
+    fetch(`${api}/cartelera`, {
         method: 'POST',
         mode: 'cors',
         headers: {
