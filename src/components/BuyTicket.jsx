@@ -10,7 +10,7 @@ import {
   Center,
   useToast,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useMoviesContext } from "../hooks/useMoviesContext";
 import { useStorage } from "../hooks/useStorage";
 import Header from "./Header";
@@ -21,6 +21,40 @@ export function BuyTicket({ param }) {
 
   let filas = [...Array(5)]
   let columnas = [...Array(10)]
+
+  const [asientos, setAsientos] = useState([])
+
+
+  const handleClick = (e, index, index2) => {
+    let selectedAsiento = `${index}${index2}`
+
+    e.target.style.backgroundColor = "white"
+    e.target.style.color = "black"
+
+    //example ==> select.nm --> 34  
+    //lo quitaremos del estado y le volveremos a pondrer su color eso hay que hacer!
+
+    const alreadySelected = asientos.some(asiento => asiento.nm == selectedAsiento)
+
+    if(alreadySelected) {
+     setAsientos(asientos.filter(asiento => asiento.nm !== selectedAsiento))
+     e.target.style.backgroundColor = "#0d1b2a"
+     e.target.style.color = "white"
+
+     return
+    }
+
+    let selected1 = {
+      nm: selectedAsiento,
+      disponible: false
+    }
+    
+    setAsientos(prev => prev.concat(selected1))
+  }
+
+  useEffect(() => {
+    console.log(asientos)
+  }, [asientos])
 
     
   const { getStorage } = useStorage()
@@ -94,8 +128,9 @@ export function BuyTicket({ param }) {
                         cursor="pointer" 
                         border="2px solid white" 
                         borderRadius={4}
-                        _hover={{bg: "white", color: "main"}}>
-                          <Text fontSize="2xl">{index1}, {index2}</Text>
+                        _hover={{bg: "white", color: "main"}}
+                        onClick={(e) => handleClick(e, index1,index2)}>
+                          {index1}, {index2}
                         </Center>
                         ))
                       }
@@ -103,10 +138,6 @@ export function BuyTicket({ param }) {
                 ))
               }
             </Box>
-
-            <Button bg="white">
-              <Text fontSize="xl" fontWeight="light" color="black">Elige tu asiento</Text>
-            </Button>
          </Box>
 
         </Flex>
