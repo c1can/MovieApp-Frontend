@@ -18,9 +18,8 @@ import {
   Stack,
   StackDivider,
   Text,
-  Flex,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useStorage } from "../hooks/useStorage";
 import api from "../variables/api";
 import Header from "./Header";
@@ -35,6 +34,8 @@ export function Admin() {
   });
 
   const toast = useToast();
+  const inputNombre = useRef(null)
+  const inputPoster = useRef(null)
 
   //QUITAR LO DEL TOKEN PORQUE YA LO TENEMOS EN EL LOCALSTORAGE
   //Y MANEJAR EN UN FORMULARIO CUANDO LE ENVIO LOS CREDITOS
@@ -132,7 +133,9 @@ export function Admin() {
                 isClosable: true,
             })
         }
-        return toast({
+        inputNombre.current.value = ''
+        inputPoster.current.value = ''
+        toast({
             title: "Perfecto!",
             description: res.success,
             status: Object.keys(res)[0],
@@ -245,6 +248,7 @@ export function Admin() {
                     Nombre
                   </FormLabel>
                   <Input
+                    ref={inputNombre}
                     type={"text"}
                     placeholder="nombre de la pelicula"
                     id="nombre"
@@ -264,6 +268,7 @@ export function Admin() {
                   </FormLabel>
                   <Input
                     type={"text"}
+                    ref={inputPoster}
                     placeholder="url del poster"
                     id="poster"
                     name="poster"
