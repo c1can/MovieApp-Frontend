@@ -31,10 +31,7 @@ export function Admin() {
   const [newMovie, setMovie] = useState({
     nombre: "",
     poster: "",
-    downsized_poster: "",
     precio: 100,
-    asientos: 50,
-    horarios: ["13:00", "16:00", "20:00"],
   });
 
   const toast = useToast();
@@ -62,7 +59,6 @@ export function Admin() {
             isClosable: true,
           });
         }
-        console.log("?");
         setCliente(res);
       });
   }, []);
@@ -117,7 +113,6 @@ export function Admin() {
 
   const handleCarteleraSubmit=(e) => {
     e.preventDefault()
-    console.log(newMovie)
     fetch(`${api}/cartelera`, {
         method: 'POST',
         mode: 'cors',
@@ -160,9 +155,8 @@ export function Admin() {
           </TabList>
           <TabPanels>
             <TabPanel>
-              {cliente.length == 0
-                ? "Ingresa tu token para ver la informacion"
-                : filterClients.map(
+              {
+                filterClients.map(
                     ({
                       nombre,
                       apellido,
@@ -266,32 +260,13 @@ export function Admin() {
                     fontWeight="bold"
                     fontFamily="heading"
                   >
-                    Imagen
+                    URL del Poster
                   </FormLabel>
                   <Input
                     type={"text"}
                     placeholder="url del poster"
                     id="poster"
                     name="poster"
-                    color="white"
-                    fontFamily="heading"
-                    onChange={handleCarteleraChange}
-                  ></Input>
-                </FormControl>
-
-                <FormControl>
-                  <FormLabel
-                    color="white"
-                    fontWeight="bold"
-                    fontFamily="heading"
-                  >
-                    Imagen comprimida
-                  </FormLabel>
-                  <Input
-                    type={"text"}
-                    placeholder="url de la imagen pequeña"
-                    id="downsized_poster"
-                    name="downsized_poster"
                     color="white"
                     fontFamily="heading"
                     onChange={handleCarteleraChange}
