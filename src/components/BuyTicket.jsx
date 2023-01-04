@@ -46,7 +46,7 @@ export function BuyTicket({ param }) {
 
     let selected1 = {
       nm: selectedAsiento,
-      disponible: false
+      reservado: true
     }
     
     setAsientos(prev => prev.concat(selected1))

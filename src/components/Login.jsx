@@ -14,7 +14,6 @@ import {
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import Header from "./Header";
-import { useUserContext } from "../hooks/useUserContext";
 import api from "../variables/api";
 
 export function Login() {
@@ -24,7 +23,6 @@ export function Login() {
       contraseña: ""
   })
 
-  const { globalUser, setGlobalUser } = useUserContext()
   
   const toast = useToast()
   const [path, setPath] = useLocation()
