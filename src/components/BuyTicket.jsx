@@ -97,9 +97,11 @@ export function BuyTicket({ param }) {
                     <Box display="flex" gap="2">
                         <Text fontSize="2xl">Horararios:</Text>
                         <Box className="horas" display="flex" gap={2} alignItems="center">
-                            {movie.horarios.map((hora, index) => (
-                               <Badge fontSize="sm" key={index}>{hora}</Badge>
-                            ))}
+                         {
+                          movie.horarios.map((hour, index) => (
+                            <Badge fontSize={"sm"} key={index}>{hour.hora}</Badge>
+                          ))
+                         }
                         </Box>
                     </Box>
                 </Box>
