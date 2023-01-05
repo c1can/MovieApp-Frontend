@@ -62,13 +62,26 @@ export function BuyTicket({ param }) {
 
   
   const handleButton = () => {
-     if(user.creditos < filteredMovies[0].precio) {
-       return toast({
-        title: "Creditos Insuficientes",
-        status: "error",
-        isClosable: true
-       })
+
+     if(asientos.length == 0) {
+      return toast({
+        title: "Escoge tu asiento",
+        description: "Selecciona tu asiento para poder reservar",
+        isClosable: true,
+        status: "error"
+      })
      }
+     if(user.creditos < asientos.length * 100) {
+      return toast({
+        title: "Creditos Insuficientes",
+        description: "Has sobrepasado la cantidad de tus creditos disponibles",
+        status: "error",
+        isClosable: true,
+        duration: 4000
+      })
+     }
+
+     alert("yeiiii")
   }
 
   return (
