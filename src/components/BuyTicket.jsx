@@ -9,6 +9,7 @@ import {
   Badge,
   Center,
   useToast,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useMoviesContext } from "../hooks/useMoviesContext";
@@ -19,20 +20,14 @@ import { PopOver } from "./PopOver";
 export function BuyTicket({ param }) {
   const { id } = param;
 
-  let filas = [...Array(5)]
-  let columnas = [...Array(10)]
-
   const [asientos, setAsientos] = useState([])
 
 
-  const handleClick = (e, index, index2) => {
-    let selectedAsiento = `${index}${index2}`
+  const handleClick = (e, nm) => {
+    let selectedAsiento = nm
 
     e.target.style.backgroundColor = "white"
     e.target.style.color = "black"
-
-    //example ==> select.nm --> 34  
-    //lo quitaremos del estado y le volveremos a pondrer su color eso hay que hacer!
 
     const alreadySelected = asientos.some(asiento => asiento.nm == selectedAsiento)
 
@@ -65,6 +60,7 @@ export function BuyTicket({ param }) {
   const { movies } = useMoviesContext()
   const filteredMovies = movies.filter((movie) => movie._id == id)
 
+  
   const handleButton = () => {
      if(user.creditos < filteredMovies[0].precio) {
        return toast({
@@ -79,7 +75,7 @@ export function BuyTicket({ param }) {
     <>
       <Header />
       <Container maxW={"container.xl"} mt="15">
-        <Flex justifyContent="space-between">
+        <Flex gap={"20px"}>
             
           {filteredMovies.map((movie) => (
             <VStack className="leftChild" alignItems="flex-start" key={movie._id} gap="5">
@@ -118,28 +114,28 @@ export function BuyTicket({ param }) {
           ))}
 
          <Box className="asientos" display="grid" placeItems="center">
-            <Box className="asientosChild">
-
-              {
-                filas.map((fila, index1) => (
-                  <Flex className={fila} key={index1} mb="20px" gap="2">
-                    {
-                      columnas.map((columna, index2) => (
-                        <Center className={columna} key={index2} w="70px" 
-                        h="70px"
-                        cursor="pointer" 
-                        border="2px solid white" 
-                        borderRadius={4}
-                        _hover={{bg: "white", color: "main"}}
-                        onClick={(e) => handleClick(e, index1,index2)}>
-                          {index1}, {index2}
-                        </Center>
-                        ))
-                      }
-                  </Flex>
-                ))
-              }
-            </Box>
+            <SimpleGrid className="asientosChild" columns={10} spacing="20px">
+                {
+                  filteredMovies.map(pelicula => {
+                    const { horarios } = pelicula
+                    return horarios.map(hour => {
+                      const { asientos } = hour
+                      return asientos.map(asiento => (
+                        <Center
+                         w="70px"
+                         key={asiento.nm}
+                         h="70px"
+                         cursor="pointer"
+                         border="2px solid white"
+                         borderRadius={4}
+                         _hover={{bg: "white", color: "main"}}
+                         onClick={(e) => handleClick(e, asiento.nm)}
+                         >{asiento.nm}</Center>
+                      ))
+                    })
+                  })
+                }
+           </SimpleGrid>
          </Box>
 
         </Flex>
