@@ -14,6 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import { useMoviesContext } from "../hooks/useMoviesContext";
 import { useStorage } from "../hooks/useStorage";
+import api from "../variables/api";
 import Header from "./Header";
 import { PopOver } from "./PopOver";
 
@@ -41,17 +42,13 @@ export function BuyTicket({ param }) {
 
     let selected1 = {
       nm: selectedAsiento,
-      reservado: true
+      reservado: true,
+      valor: 100
     }
     
     setAsientos(prev => prev.concat(selected1))
   }
 
-  useEffect(() => {
-    console.log(asientos)
-  }, [asientos])
-
-    
   const { getStorage } = useStorage()
   const user = getStorage()
 
@@ -81,7 +78,28 @@ export function BuyTicket({ param }) {
       })
      }
 
-     alert("yeiiii")
+     fetch(`${api}/cartelera/reservar/${id}`, {
+      method: 'PUT',
+      mode: 'cors',
+      headers: {
+        'Content-Type': "application/json"
+      },
+      body: JSON.stringify(asientos)
+     })
+     .then(response => response.json())
+     .then(res => {
+      if(res.success) {
+        return toast({
+          title: res.success,
+          description: 'has reservado correctamente tus asientos',
+          status: Object.keys(res)[0],
+          duration: 4000,
+          isClosable: true
+        })
+
+      }
+      console.log("que a pachao")
+     }).catch((error) => console.log(error))
   }
 
   return (
