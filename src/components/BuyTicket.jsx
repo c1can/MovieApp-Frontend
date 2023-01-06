@@ -102,6 +102,8 @@ export function BuyTicket({ param }) {
      }).catch((error) => console.log(error))
   }
 
+
+  //TODO--AGREGAR VALIDACIONES PARA QUE UN USUARIO NO RESERVE UN ASIENTO YA RESERVADO
   return (
     <>
       <Header />
@@ -155,9 +157,11 @@ export function BuyTicket({ param }) {
                         <Center
                          w="70px"
                          key={asiento.nm}
+                         dis
                          h="70px"
-                         cursor="pointer"
-                         border="2px solid white"
+                         pointerEvents={asiento.reservado ? 'none' : 'all'}
+                         cursor={asiento.reservado ? 'not-allowed' : 'pointer'}
+                         border={asiento.reservado ? '2px solid red' : '2px solid white'}
                          borderRadius={4}
                          _hover={{bg: "white", color: "main"}}
                          onClick={(e) => handleClick(e, asiento.nm)}
