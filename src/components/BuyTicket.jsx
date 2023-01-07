@@ -28,8 +28,8 @@ export function BuyTicket({ param }) {
   const handleClick = (e, nm) => {
     let selectedAsiento = nm
 
-    e.target.style.backgroundColor = "white"
-    e.target.style.color = "black"
+    e.target.style.backgroundColor = "green"
+    e.target.style.color = "white"
 
     const alreadySelected = asientos.some(asiento => asiento.nm == selectedAsiento)
 
@@ -123,14 +123,12 @@ export function BuyTicket({ param }) {
           duration: 4000,
           isClosable: true
         })
-
       }
       console.log("que a pachao")
      }).catch((error) => console.log(error))
   }
 
 
-  //TODO--AGREGAR VALIDACIONES PARA QUE UN USUARIO NO RESERVE UN ASIENTO YA RESERVADO
   return (
     <>
       <Header />
@@ -184,13 +182,12 @@ export function BuyTicket({ param }) {
                         <Center
                          w="70px"
                          key={asiento.nm}
-                         dis
                          h="70px"
                          pointerEvents={asiento.reservado ? 'none' : 'all'}
                          cursor={asiento.reservado ? 'not-allowed' : 'pointer'}
-                         border={asiento.reservado ? '2px solid red' : '2px solid white'}
+                         border={asiento.reservado ? '2px solid red' : '2px solid green'}
                          borderRadius={4}
-                         _hover={{bg: "white", color: "main"}}
+                         _hover={{bg: "green"}}
                          onClick={(e) => handleClick(e, asiento.nm)}
                          >{asiento.nm}</Center>
                       ))
