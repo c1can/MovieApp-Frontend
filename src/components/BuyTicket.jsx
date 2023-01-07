@@ -11,6 +11,7 @@ import {
   useToast,
   SimpleGrid,
 } from "@chakra-ui/react";
+import { m } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useMoviesContext } from "../hooks/useMoviesContext";
 import { useStorage } from "../hooks/useStorage";
@@ -57,6 +58,23 @@ export function BuyTicket({ param }) {
   const { movies } = useMoviesContext()
   const filteredMovies = movies.filter((movie) => movie._id == id)
 
+
+  const alreadyReserved = () => {
+    
+      const { horarios } = filteredMovies[0]
+
+      const asientosArray = horarios.map(horario => {
+        const {asientos} = horario
+        return asientos
+      })
+
+      const asientosDB = asientosArray[0]
+
+      const isAtleastOne = asientosDB.filter(a => asientos.some(b => b.nm === a.nm && b.reservado === a.reservado))
+
+      return isAtleastOne
+  }
+
   
   const handleButton = () => {
 
@@ -77,6 +95,15 @@ export function BuyTicket({ param }) {
         duration: 4000
       })
      }
+     
+     const reserverd = alreadyReserved()
+
+     if(reserverd.length > 0) return toast({
+      title: 'No seas mal intencionado',
+      description: 'no intentens reservar butacas que ya estan reservadas',
+      status: 'error',
+      isClosable: true
+     })
 
      fetch(`${api}/cartelera/reservar/${id}`, {
       method: 'PUT',
