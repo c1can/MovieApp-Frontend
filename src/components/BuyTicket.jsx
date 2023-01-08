@@ -100,7 +100,7 @@ export function BuyTicket({ param }) {
 
      if(reserverd.length > 0) return toast({
       title: 'No seas mal intencionado',
-      description: 'no intentens reservar butacas que ya estan reservadas',
+      description: 'no intentes reservar butacas que ya estan reservadas',
       status: 'error',
       isClosable: true
      })
