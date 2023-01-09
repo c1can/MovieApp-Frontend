@@ -9,10 +9,9 @@ import {
   MenuList,
   StackDivider,
   Text,
-  Flex,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, EditIcon } from "@chakra-ui/icons";
-import { Link } from "wouter"
+import { Link, useLocation } from "wouter"
 import { useStorage } from "../hooks/useStorage";
 
 function Header() {
@@ -22,9 +21,16 @@ function Header() {
   const response = getStorage()
   const { nombre, creditos, correo } = response
 
-  const closeSession = () => {
+
+  const [path, setPath] = useLocation()
+
+  const closeSession = (e) => {
+    const inputValue = e.target.value
+
+    if(inputValue === 'Iniciar Sesion') return setPath('/login')
+
     window.localStorage.clear()
-    window.location.reload(false)
+    window.location.reload(false) 
   }
 
   return (
@@ -103,7 +109,7 @@ function Header() {
                   </Text>
                 </Stack>
 
-                <Button fontSize="xl" fontWeight="light" bg="white" color="black" onClick={closeSession}>Cerrar Sesion</Button>
+                <Button fontSize="xl" fontWeight="light" bg="white" color="black" value={nombre == 'anonimo' ? 'Iniciar Sesion' : 'Cerrar Sesion'} onClick={e => closeSession(e)}>{nombre == 'anonimo' ? 'Iniciar Sesion': 'Cerrar Sesion'}</Button>
               </Stack>
             </MenuList>
           </Menu>
