@@ -106,7 +106,6 @@ export function BuyTicket({ param }) {
      })
 
      const valorRestante = user.creditos - (asientos.length * 100)
-     console.log(valorRestante)
      
      try {
        const reserve = await fetch(`${api}/cartelera/reservar/${id}`, {
@@ -125,6 +124,26 @@ export function BuyTicket({ param }) {
         isClosable: true,
         duration: 1000
        })
+
+       const addBill = await fetch(`${api}/facturacion`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          butacas: asientos.map(el => {
+            const { reservado, ...rest } = el
+            return {
+              ...rest
+            }
+          }),
+          total: asientos.length * 100,
+          userId: user._id
+        })
+       })
+       const billResponse = await addBill.json()
+       await billResponse
 
        const changeCreditos = await fetch(`${api}/clientes/${user._id}`, {
         method: 'PUT',
