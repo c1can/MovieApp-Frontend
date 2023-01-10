@@ -68,7 +68,6 @@ export function Admin() {
     setCreditos(e.target.value);
   };
   const handleCreditosSubmit = (e, clientId) => {
-    console.log("hpña");
     e.preventDefault();
     console.log(clientId);
     const id = clientId;

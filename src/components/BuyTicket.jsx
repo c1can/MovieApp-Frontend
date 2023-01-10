@@ -76,7 +76,7 @@ export function BuyTicket({ param }) {
   }
 
   
-  const handleButton = () => {
+  const handleButton = async() => {
 
      if(asientos.length == 0) {
       return toast({
@@ -105,6 +105,62 @@ export function BuyTicket({ param }) {
       isClosable: true
      })
 
+     const valorRestante = user.creditos - (asientos.length * 100)
+     console.log(valorRestante)
+     
+     try {
+       const reserve = await fetch(`${api}/cartelera/reservar/${id}`, {
+        method: 'PUT',
+        mode: 'cors',
+        headers: {
+        'Content-Type': "application/json"
+        },
+        body: JSON.stringify(asientos)
+     })
+       const reserveResponse = await reserve.json()
+       toast({
+        title: reserveResponse.success,
+        description: 'Haz reservado tu asiento',
+        status: Object.keys(reserveResponse)[0],
+        isClosable: true,
+        duration: 1000
+       })
+
+       const changeCreditos = await fetch(`${api}/clientes/${user._id}`, {
+        method: 'PUT',
+        mode: 'cors',
+        headers: {
+          'Content-Type': "application/json"
+        },
+        body: JSON.stringify({creditos: valorRestante})
+       })
+       await changeCreditos.json()
+
+       const reloadUser = await fetch(`${api}/clientes/${user._id}`)
+       const reloadUserResponse = await reloadUser.json()
+       window.localStorage.setItem('user', JSON.stringify(reloadUserResponse))
+       setTimeout(() => {
+        window.location.reload(true)
+       }, 1500)
+
+     } catch (error) {
+      console.log("cayo en el catch")
+     }
+
+     /*
+     const b = fetch(`${api}/clientes/${user._id}`, {
+      method: 'PUT',
+      mode: 'cors',
+      headers: { 'Content-Type': "application/json" },
+      body: JSON.stringify({creditos: valorRestante})
+     }).then(res => res.json())
+
+     const c = fetch(`${api}/clientes/${user._id}`).then(res => res.json())
+
+     */
+
+     //hacer una peticion al usuarios para restarle creditos, y otra peticion post a reservaciones
+    /*
      fetch(`${api}/cartelera/reservar/${id}`, {
       method: 'PUT',
       mode: 'cors',
@@ -126,6 +182,7 @@ export function BuyTicket({ param }) {
       }
       console.log("que a pachao")
      }).catch((error) => console.log(error))
+     */
   }
 
 
