@@ -58,9 +58,11 @@ function Header() {
              </Link>
              : 
              <>
-                <Button bg="white">
-                  <Text fontSize="xl" fontWeight="light" color="black">Mis Reservaciones</Text>
-                </Button>
+                <Link to="/reservaciones">
+                  <Button bg="white">
+                    <Text fontSize="xl" fontWeight="light" color="black">Mis Reservaciones</Text>
+                  </Button>
+                </Link>
                 <Link to="/register">
                   <Button bg="transparent">
                   <EditIcon color="white"/>
