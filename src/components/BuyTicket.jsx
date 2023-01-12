@@ -138,6 +138,7 @@ export function BuyTicket({ param }) {
               ...rest
             }
           }),
+          pelicula: filteredMovies[0].nombre,
           total: asientos.length * 100,
           userId: user._id
         })

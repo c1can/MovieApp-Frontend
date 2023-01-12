@@ -63,11 +63,6 @@ function Header() {
                     <Text fontSize="xl" fontWeight="light" color="black">Mis Reservaciones</Text>
                   </Button>
                 </Link>
-                <Link to="/register">
-                  <Button bg="transparent">
-                  <EditIcon color="white"/>
-                  </Button>
-                </Link>
              </>
           }
             

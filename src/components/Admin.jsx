@@ -37,9 +37,6 @@ export function Admin() {
   const inputNombre = useRef(null)
   const inputPoster = useRef(null)
 
-  //QUITAR LO DEL TOKEN PORQUE YA LO TENEMOS EN EL LOCALSTORAGE
-  //Y MANEJAR EN UN FORMULARIO CUANDO LE ENVIO LOS CREDITOS
-
   const { getStorage } = useStorage();
   const logUser = getStorage();
   const { token } = logUser;
@@ -139,6 +136,11 @@ export function Admin() {
             description: res.success,
             status: Object.keys(res)[0],
             isClosable: true
+        })
+        setMovie({
+         nombre: "",
+         poster: "",
+         precio: 100 
         })
     })
     
