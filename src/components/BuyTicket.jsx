@@ -11,8 +11,7 @@ import {
   useToast,
   SimpleGrid,
 } from "@chakra-ui/react";
-import { m } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMoviesContext } from "../hooks/useMoviesContext";
 import { useStorage } from "../hooks/useStorage";
 import api from "../variables/api";
@@ -166,43 +165,6 @@ export function BuyTicket({ param }) {
      } catch (error) {
       console.log("cayo en el catch")
      }
-
-     /*
-     const b = fetch(`${api}/clientes/${user._id}`, {
-      method: 'PUT',
-      mode: 'cors',
-      headers: { 'Content-Type': "application/json" },
-      body: JSON.stringify({creditos: valorRestante})
-     }).then(res => res.json())
-
-     const c = fetch(`${api}/clientes/${user._id}`).then(res => res.json())
-
-     */
-
-     //hacer una peticion al usuarios para restarle creditos, y otra peticion post a reservaciones
-    /*
-     fetch(`${api}/cartelera/reservar/${id}`, {
-      method: 'PUT',
-      mode: 'cors',
-      headers: {
-        'Content-Type': "application/json"
-      },
-      body: JSON.stringify(asientos)
-     })
-     .then(response => response.json())
-     .then(res => {
-      if(res.success) {
-        return toast({
-          title: res.success,
-          description: 'has reservado correctamente tus asientos',
-          status: Object.keys(res)[0],
-          duration: 4000,
-          isClosable: true
-        })
-      }
-      console.log("que a pachao")
-     }).catch((error) => console.log(error))
-     */
   }
 
 
