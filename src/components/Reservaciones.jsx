@@ -1,4 +1,4 @@
-import { Container, Text, TableContainer, Th, Table, TableCaption, Thead, Tr, Tbody, Td } from "@chakra-ui/react";
+import { Container, Text, TableContainer, Th, Table, Thead, Tr, Tbody, Td } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useStorage } from "../hooks/useStorage";
 import api from "../variables/api";
