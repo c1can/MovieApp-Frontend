@@ -11,6 +11,7 @@ import {
   useToast,
   SimpleGrid,
 } from "@chakra-ui/react";
+import { useMediaQuery } from "@chakra-ui/react";
 import { useState } from "react";
 import { useMoviesContext } from "../hooks/useMoviesContext";
 import { useStorage } from "../hooks/useStorage";
@@ -22,6 +23,8 @@ export function BuyTicket({ param }) {
   const { id } = param;
 
   const [asientos, setAsientos] = useState([])
+  const [isLargerThan1280] = useMediaQuery('(min-width: 1280px)')
+
 
 
   const handleClick = (e, nm) => {
@@ -172,11 +175,11 @@ export function BuyTicket({ param }) {
     <>
       <Header />
       <Container maxW={"container.xl"} mt="15">
-        <Flex gap={"20px"}>
+        <Box display="flex" gap={"20px"} flexDir={isLargerThan1280 ? 'row' : 'column'} >
             
           {filteredMovies.map((movie) => (
             <VStack className="leftChild" alignItems="flex-start" key={movie._id} gap="5">
-                <Box height="600px" w="400px">
+                <Box>
                     <Image h="100%" src={movie.img}></Image>
                 </Box>
 
@@ -211,7 +214,7 @@ export function BuyTicket({ param }) {
           ))}
 
          <Box className="asientos" display="grid" placeItems="center">
-            <SimpleGrid className="asientosChild" columns={10} spacing="20px">
+            <SimpleGrid className="asientosChild" columns={10} spacing={isLargerThan1280 ? '20px' : '5px'}>
                 {
                   filteredMovies.map(pelicula => {
                     const { horarios } = pelicula
@@ -219,9 +222,9 @@ export function BuyTicket({ param }) {
                       const { asientos } = hour
                       return asientos.map(asiento => (
                         <Center
-                         w="70px"
+                         w={isLargerThan1280 ? '70px' : '25px'}
                          key={asiento.nm}
-                         h="70px"
+                         h={isLargerThan1280 ? '70px' : '25px'}
                          pointerEvents={asiento.reservado ? 'none' : 'all'}
                          cursor={asiento.reservado ? 'not-allowed' : 'pointer'}
                          border={asiento.reservado ? '2px solid red' : '2px solid green'}
@@ -236,7 +239,7 @@ export function BuyTicket({ param }) {
            </SimpleGrid>
          </Box>
 
-        </Flex>
+        </Box>
       </Container>
     </>
   );
