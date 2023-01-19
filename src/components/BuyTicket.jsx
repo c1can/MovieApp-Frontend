@@ -179,7 +179,7 @@ export function BuyTicket({ param }) {
             
           {filteredMovies.map((movie) => (
             <VStack className="leftChild" alignItems="flex-start" key={movie._id} gap="5">
-                <Box>
+                <Box h={isLargerThan1280 ? '600px' : 'auto'} w={isLargerThan1280 ? '400px' : 'auto'}>
                     <Image h="100%" src={movie.img}></Image>
                 </Box>
 
