@@ -14,7 +14,7 @@ import { useMediaQuery } from "@chakra-ui/react";
 import { useState } from "react";
 import { useMoviesContext } from "../hooks/useMoviesContext";
 import { useStorage } from "../hooks/useStorage";
-import api from "../variables/api";
+import API_URL from "../variables/api";
 import Header from "./Header";
 import { PopOver } from "./PopOver";
 
@@ -109,7 +109,7 @@ export function BuyTicket({ param }) {
      const valorRestante = user.creditos - (asientos.length * 100)
      
      try {
-       const reserve = await fetch(`${api}/cartelera/reservar/${id}`, {
+       const reserve = await fetch(`${API_URL}/cartelera/reservar/${id}`, {
         method: 'PUT',
         mode: 'cors',
         headers: {
@@ -126,7 +126,7 @@ export function BuyTicket({ param }) {
         duration: 1000
        })
 
-       const addBill = await fetch(`${api}/facturacion`, {
+       const addBill = await fetch(`${API_URL}/facturacion`, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -147,7 +147,7 @@ export function BuyTicket({ param }) {
        const billResponse = await addBill.json()
        await billResponse
 
-       const changeCreditos = await fetch(`${api}/clientes/${user._id}`, {
+       const changeCreditos = await fetch(`${API_URL}/clientes/${user._id}`, {
         method: 'PUT',
         mode: 'cors',
         headers: {
@@ -157,7 +157,7 @@ export function BuyTicket({ param }) {
        })
        await changeCreditos.json()
 
-       const reloadUser = await fetch(`${api}/clientes/${user._id}`)
+       const reloadUser = await fetch(`${API_URL}/clientes/${user._id}`)
        const reloadUserResponse = await reloadUser.json()
        window.localStorage.setItem('user', JSON.stringify(reloadUserResponse))
        setTimeout(() => {

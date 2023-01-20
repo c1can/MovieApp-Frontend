@@ -14,7 +14,7 @@ import {
 import { useState } from "react";
 import { Link } from "wouter";
 import { useLocation } from "wouter";
-import api from "../variables/api";
+import API_URL from "../variables/api";
 import Header from "./Header";
 
 export function Register() {
@@ -37,7 +37,7 @@ export function Register() {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch(`${api}/register`, {
+        fetch(`${API_URL}/register`, {
             method: 'POST',
             mode: 'cors',
             headers: {

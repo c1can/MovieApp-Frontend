@@ -1,8 +1,7 @@
-import api from "../variables/api"
-const production = "https://movieapp-backend-production.up.railway.app/api/cartelera"
+import API_URL from "../variables/api"
 
 export function getCartelera() {
-    return fetch(`${api}/cartelera`)
+    return fetch(`${API_URL}/cartelera`)
         .then(res => res.json())
         .then(response => response)
 } 

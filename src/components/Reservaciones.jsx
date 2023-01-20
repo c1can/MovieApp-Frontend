@@ -1,7 +1,7 @@
 import { Container, Text, TableContainer, Th, Table, Thead, Tr, Tbody, Td } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useStorage } from "../hooks/useStorage";
-import api from "../variables/api";
+import API_URL from "../variables/api";
 import Header from "./Header";
 
 export function Reservaciones(){
@@ -12,7 +12,7 @@ export function Reservaciones(){
     
     useEffect(() => {
         if(user.nombre !== 'anonimo') {
-            fetch(`${api}/facturacion/${user._id}`)
+            fetch(`${API_URL}/facturacion/${user._id}`)
             .then(res => res.json())
             .then(result => {
                 setFacturas(result)

@@ -21,7 +21,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState, useRef } from "react";
 import { useStorage } from "../hooks/useStorage";
-import api from "../variables/api";
+import API_URL from "../variables/api";
 import Header from "./Header";
 
 export function Admin() {
@@ -41,7 +41,7 @@ export function Admin() {
   const logUser = getStorage();
   const { token } = logUser;
   useEffect(() => {
-    fetch(`${api}/clientes`, {
+    fetch(`${API_URL}/clientes`, {
       method: "GET",
       headers: new Headers({
         "x-access-token": token,
@@ -69,7 +69,7 @@ export function Admin() {
     console.log(clientId);
     const id = clientId;
     fetch(
-      `${api}/clientes/${id}`,
+      `${API_URL}/clientes/${id}`,
       {
         method: "PUT",
         mode: "cors",
@@ -110,7 +110,7 @@ export function Admin() {
 
   const handleCarteleraSubmit=(e) => {
     e.preventDefault()
-    fetch(`${api}/cartelera`, {
+    fetch(`${API_URL}/cartelera`, {
         method: 'POST',
         mode: 'cors',
         headers: {

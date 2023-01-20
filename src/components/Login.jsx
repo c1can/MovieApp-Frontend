@@ -14,7 +14,7 @@ import {
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import Header from "./Header";
-import api from "../variables/api";
+import API_URL from "../variables/api";
 
 export function Login() {
 
@@ -36,7 +36,7 @@ export function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    fetch(`${api}/login`, {
+    fetch(`${API_URL}/login`, {
       method: 'POST',
       mode: 'cors',
       headers: {
