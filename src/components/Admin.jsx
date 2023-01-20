@@ -19,14 +19,15 @@ import {
   StackDivider,
   Text,
 } from "@chakra-ui/react";
-import { useEffect, useState, useRef } from "react";
-import { useStorage } from "../hooks/useStorage";
+import { useState, useRef } from "react";
+import { useClientes } from "../hooks/AdminHooks/useClientes";
+import { useCreditos } from "../hooks/AdminHooks/useCreditos";
 import API_URL from "../variables/api";
 import Header from "./Header";
 
 export function Admin() {
-  const [cliente, setCliente] = useState([]);
-  const [creditos, setCreditos] = useState(0);
+  const { clientes } = useClientes()
+  const { handleCreditosChange, handleCreditosSubmit, inputCreditos } = useCreditos()
   const [newMovie, setMovie] = useState({
     nombre: "",
     poster: "",
@@ -36,70 +37,6 @@ export function Admin() {
   const toast = useToast();
   const inputNombre = useRef(null)
   const inputPoster = useRef(null)
-
-  const { getStorage } = useStorage();
-  const logUser = getStorage();
-  const { token } = logUser;
-  useEffect(() => {
-    fetch(`${API_URL}/clientes`, {
-      method: "GET",
-      headers: new Headers({
-        "x-access-token": token,
-      }),
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.error) {
-          return toast({
-            title: "Algo Salio Mal!",
-            description: res.error,
-            status: Object.keys(res)[0],
-            isClosable: true,
-          });
-        }
-        setCliente(res);
-      });
-  }, []);
-
-  const handleCreditosChange = (e) => {
-    setCreditos(e.target.value);
-  };
-  const handleCreditosSubmit = (e, clientId) => {
-    e.preventDefault();
-    console.log(clientId);
-    const id = clientId;
-    fetch(
-      `${API_URL}/clientes/${id}`,
-      {
-        method: "PUT",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          "x-access-token": token,
-        },
-        body: JSON.stringify({ creditos: creditos }),
-      }
-    )
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-        if (res.success) {
-          return toast({
-            title: "Bien hecho",
-            description: res.success,
-            status: Object.keys(res)[0],
-            isClosable: true,
-          });
-        }
-        return toast({
-          title: "Algo Salio mal",
-          description: "no se encontro el id",
-          status: "error",
-          isClosable: true,
-        });
-      })
-      .catch((error) => console.log(error));
-  };
 
   const handleCarteleraChange=(e) => {
     setMovie({
@@ -146,7 +83,7 @@ export function Admin() {
     
     .catch(error => console.log(error))
   }
-  const filterClients = cliente.filter((cli) => cli.rol !== "admin");
+  const filterClients = clientes.filter((cli) => cli.rol !== "admin");
 
   return (
     <>
@@ -215,6 +152,7 @@ export function Admin() {
                               >
                                 <FormControl>
                                   <Input
+                                    ref={inputCreditos}
                                     w="80px"
                                     defaultValue={0}
                                     onChange={handleCreditosChange}

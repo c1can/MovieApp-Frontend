@@ -16,7 +16,6 @@ import { useStorage } from "../hooks/useStorage";
 
 function Header() {
   
-  //TO DO: Arreglar esto para que no se renderize innecesariamente
   const { getStorage } = useStorage()
   const response = getStorage()
   const { nombre, creditos, correo } = response
