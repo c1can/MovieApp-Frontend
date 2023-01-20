@@ -10,7 +10,6 @@ import {
   FormLabel,
   Input,
   Button,
-  useToast,
   Card,
   CardHeader,
   Heading,
@@ -19,71 +18,24 @@ import {
   StackDivider,
   Text,
 } from "@chakra-ui/react";
-import { useState, useRef } from "react";
+import { useCartelera } from "../hooks/AdminHooks/useCartelera";
 import { useClientes } from "../hooks/AdminHooks/useClientes";
 import { useCreditos } from "../hooks/AdminHooks/useCreditos";
-import API_URL from "../variables/api";
 import Header from "./Header";
 
 export function Admin() {
-  const { clientes } = useClientes()
-  const { handleCreditosChange, handleCreditosSubmit, inputCreditos } = useCreditos()
-  const [newMovie, setMovie] = useState({
-    nombre: "",
-    poster: "",
-    precio: 100,
-  });
+  const { clientes } = useClientes();
+  const { handleCreditosChange, handleCreditosSubmit, inputCreditos } =
+    useCreditos();
 
-  const toast = useToast();
-  const inputNombre = useRef(null)
-  const inputPoster = useRef(null)
+  const {
+    inputNombre,
+    inputPoster,
+    handleCarteleraChange,
+    handleCarteleraSubmit,
+  } = useCartelera();
 
-  const handleCarteleraChange=(e) => {
-    setMovie({
-        ...newMovie,
-        [e.target.name]: e.target.value
-    })
-  } 
-
-  const handleCarteleraSubmit=(e) => {
-    e.preventDefault()
-    fetch(`${API_URL}/cartelera`, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-           'Content-Type': 'application/json',
-           "x-access-token": token
-        },
-        body: JSON.stringify(newMovie)
-    })
-    .then(response => response.json())
-    .then(res => {
-        if(res.error) {
-            return toast({
-                title: "Error",
-                description: res.error,
-                status: Object.keys(res)[0],
-                isClosable: true,
-            })
-        }
-        inputNombre.current.value = ''
-        inputPoster.current.value = ''
-        toast({
-            title: "Perfecto!",
-            description: res.success,
-            status: Object.keys(res)[0],
-            isClosable: true
-        })
-        setMovie({
-         nombre: "",
-         poster: "",
-         precio: 100 
-        })
-    })
-    
-    .catch(error => console.log(error))
-  }
-  const filterClients = clientes.filter((cli) => cli.rol !== "admin");
+  const filterClients = clientes.filter(({ rol }) => rol !== "admin");
 
   return (
     <>
@@ -96,79 +48,78 @@ export function Admin() {
           </TabList>
           <TabPanels>
             <TabPanel>
-              {
-                filterClients.map(
-                    ({
-                      nombre,
-                      apellido,
-                      correo,
-                      telefono,
-                      creditos,
-                      rol,
-                      _id,
-                    }) => (
-                      <Card key={_id}>
-                        <CardHeader>
-                          <Heading size="md" color="white">
-                            {nombre} {apellido}
+              {filterClients.map(
+                ({
+                  nombre,
+                  apellido,
+                  correo,
+                  telefono,
+                  creditos,
+                  rol,
+                  _id,
+                }) => (
+                  <Card key={_id}>
+                    <CardHeader>
+                      <Heading size="md" color="white">
+                        {nombre} {apellido}
+                      </Heading>
+                    </CardHeader>
+                    <CardBody color="white" fontFamily="heading">
+                      <Stack divider={<StackDivider />} spacing="4">
+                        <Box>
+                          <Heading size="xs" textTransform="uppercase">
+                            Correo Electronico
                           </Heading>
-                        </CardHeader>
-                        <CardBody color="white" fontFamily="heading">
-                          <Stack divider={<StackDivider />} spacing="4">
-                            <Box>
-                              <Heading size="xs" textTransform="uppercase">
-                                Correo Electronico
-                              </Heading>
-                              <Text pt="2" fontSize="sm">
-                                {correo}
-                              </Text>
-                            </Box>
-                            <Box>
-                              <Heading size="xs" textTransform="uppercase">
-                                Rol de Usuario
-                              </Heading>
-                              <Text pt="2" fontSize="sm">
-                                {rol}
-                              </Text>
-                            </Box>
-                            <Box>
-                              <Heading size="xs" textTransform="uppercase">
-                                Telefono
-                              </Heading>
-                              <Text pt="2" fontSize="sm">
-                                {telefono}
-                              </Text>
-                            </Box>
-                            <Box>
-                              <Heading size="xs" textTransform="uppercase">
-                                Cantidad de Creditos
-                              </Heading>
-                              <Text>{creditos}</Text>
-                              <Box
-                                as="form"
-                                onSubmit={(e) => handleCreditosSubmit(e, _id)}
-                                display="flex"
-                                gap="10px"
-                              >
-                                <FormControl>
-                                  <Input
-                                    ref={inputCreditos}
-                                    w="80px"
-                                    defaultValue={0}
-                                    onChange={handleCreditosChange}
-                                  ></Input>
-                                </FormControl>
+                          <Text pt="2" fontSize="sm">
+                            {correo}
+                          </Text>
+                        </Box>
+                        <Box>
+                          <Heading size="xs" textTransform="uppercase">
+                            Rol de Usuario
+                          </Heading>
+                          <Text pt="2" fontSize="sm">
+                            {rol}
+                          </Text>
+                        </Box>
+                        <Box>
+                          <Heading size="xs" textTransform="uppercase">
+                            Telefono
+                          </Heading>
+                          <Text pt="2" fontSize="sm">
+                            {telefono}
+                          </Text>
+                        </Box>
+                        <Box>
+                          <Heading size="xs" textTransform="uppercase">
+                            Cantidad de Creditos
+                          </Heading>
+                          <Text>{creditos}</Text>
+                          <Box
+                            as="form"
+                            onSubmit={(e) => handleCreditosSubmit(e, _id)}
+                            display="flex"
+                            gap="10px"
+                          >
+                            <FormControl>
+                              <Input
+                                ref={inputCreditos}
+                                w="80px"
+                                defaultValue={0}
+                                onChange={handleCreditosChange}
+                              ></Input>
+                            </FormControl>
 
-                                <Button type="submit" bg="white" color="main">
-                                  Añadir Creditos
-                                </Button>
-                              </Box>
-                            </Box>
-                          </Stack>
-                        </CardBody>
-                      </Card>
-                    )
-                  )}
+                            <Button type="submit" bg="white" color="main">
+                              Añadir Creditos
+                            </Button>
+                          </Box>
+                        </Box>
+                      </Stack>
+                    </CardBody>
+                  </Card>
+                )
+              )}
             </TabPanel>
             <TabPanel>
               <Box
