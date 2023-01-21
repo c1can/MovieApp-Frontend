@@ -21,10 +21,8 @@ import { PopOver } from "./PopOver";
 export function BuyTicket({ param }) {
   const { id } = param;
 
-  const [asientos, setAsientos] = useState([])
+  const [asientos, setAsientos] = useState([]) //esto solo lo uso para guardar los numeros de los que cliqueo
   const [isLargerThan1280] = useMediaQuery('(min-width: 1280px)')
-
-
 
   const handleClick = (e, nm) => {
     let selectedAsiento = nm

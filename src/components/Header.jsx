@@ -10,7 +10,7 @@ import {
   StackDivider,
   Text,
 } from "@chakra-ui/react";
-import { ChevronDownIcon, EditIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Link, useLocation } from "wouter"
 import { useStorage } from "../hooks/useStorage";
 
@@ -19,7 +19,6 @@ function Header() {
   const { getStorage } = useStorage()
   const response = getStorage()
   const { nombre, creditos, correo } = response
-
 
   const [path, setPath] = useLocation()
 

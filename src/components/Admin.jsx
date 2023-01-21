@@ -24,9 +24,8 @@ import { useCreditos } from "../hooks/AdminHooks/useCreditos";
 import Header from "./Header";
 
 export function Admin() {
-  const { clientes } = useClientes();
-  const { handleCreditosChange, handleCreditosSubmit, inputCreditos } =
-    useCreditos();
+  const { justClients } = useClientes();
+  const { handleCreditosChange, handleCreditosSubmit, inputCreditos } = useCreditos();
 
   const {
     inputNombre,
@@ -34,8 +33,6 @@ export function Admin() {
     handleCarteleraChange,
     handleCarteleraSubmit,
   } = useCartelera();
-
-  const filterClients = clientes.filter(({ rol }) => rol !== "admin");
 
   return (
     <>
@@ -48,7 +45,7 @@ export function Admin() {
           </TabList>
           <TabPanels>
             <TabPanel>
-              {filterClients.map(
+              {justClients.map(
                 ({
                   nombre,
                   apellido,
