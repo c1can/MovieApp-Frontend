@@ -4,7 +4,7 @@ import { Home } from "../components/Home"
 import { Reservaciones } from "../components/Reservaciones"
 import { Register } from "../components/Register"
 import { Login } from "../components/Login"
-import { Admin } from "../components/Admin"
+import { Admin } from "../components/Admin_/Admin"
 import { ProtectedRoute } from "../components/ProtectedRoute"
 
 export function Routes() {

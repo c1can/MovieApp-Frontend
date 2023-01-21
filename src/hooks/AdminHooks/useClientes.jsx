@@ -17,7 +17,7 @@ export function useClientes() {
       })
   }, [])
 
-  const justClients = clientes.filter(({ rol }) => rol !== 'admin')
+  const clientUsers = clientes.filter(({ rol }) => rol !== 'admin')
 
-  return { justClients };
+  return { clientUsers };
 }
