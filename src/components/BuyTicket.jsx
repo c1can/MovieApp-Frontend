@@ -167,7 +167,6 @@ export function BuyTicket({ param }) {
      }
   }
 
-
   return (
     <>
       <Header />
