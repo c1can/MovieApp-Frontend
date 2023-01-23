@@ -1,22 +1,11 @@
-import { Container, Text, TableContainer, Th, Table, Thead, Tr, Tbody, Td } from "@chakra-ui/react";
-import { useReservaciones } from "../hooks/Reservaciones/useReservaciones";
-import { useStorage } from "../hooks/useStorage";
-import Header from "./Header/Header";
+import { TableContainer, Th, Table, Thead, Tr, Tbody, Td, Text } from "@chakra-ui/react";
 
-export function Reservaciones(){
-    const { getStorage } = useStorage()
-    const user = getStorage()
-    const { facturas } = useReservaciones(user)
 
+export function Factura({ facturas }) {
     return (
         <>
-        <Header />
-        <Container maxW='container.xl'>
             {
-                user.rol == 'anonimo' 
-                ? <Text>Registrate para poder ver tus reservaciones</Text>
-                : 
-                    facturas.map(factura => (
+                facturas.map(factura => (
                         <TableContainer key={factura._id} my={"40px"} border="2px solid white">
                             <Table variant="unstyled">
                                 <Thead>
@@ -40,9 +29,7 @@ export function Reservaciones(){
                             </Table>
                         </TableContainer>
                     ))
-
             }
-        </Container>
         </>
     )
 }
