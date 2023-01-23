@@ -1,5 +1,5 @@
 import { Route } from "wouter"
-import { BuyTicket } from "../components/BuyTicket"
+import { BuyTicket } from "../components/BuyTicket/BuyTicket"
 import { Home } from "../components/Home"
 import { Reservaciones } from "../components/Reservaciones"
 import { Register } from "../components/Register"
