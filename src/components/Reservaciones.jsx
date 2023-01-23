@@ -1,25 +1,12 @@
 import { Container, Text, TableContainer, Th, Table, Thead, Tr, Tbody, Td } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useReservaciones } from "../hooks/Reservaciones/useReservaciones";
 import { useStorage } from "../hooks/useStorage";
-import API_URL from "../variables/api";
 import Header from "./Header/Header";
 
 export function Reservaciones(){
-
-    const [ facturas, setFacturas ] = useState([])
     const { getStorage } = useStorage()
     const user = getStorage()
-    
-    useEffect(() => {
-        if(user.nombre !== 'anonimo') {
-            fetch(`${API_URL}/facturacion/${user._id}`)
-            .then(res => res.json())
-            .then(result => {
-                setFacturas(result)
-            })
-        }
-
-    }, [])
+    const { facturas } = useReservaciones(user)
 
     return (
         <>
