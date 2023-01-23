@@ -3,10 +3,10 @@ import { useStorage } from "../hooks/useStorage";
 
 export function ProtectedRoute({children}) {
     const { getStorage } = useStorage()
-    const response = getStorage()
+    const user = getStorage()
 
         {
-            return response.rol !== "admin" ? <Redirect to="/"/> : children
+            return user.rol !== "admin" ? <Redirect to="/"/> : children
         }
 
 }
