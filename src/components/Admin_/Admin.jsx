@@ -5,7 +5,7 @@ import {
   Tabs,
   TabPanels,
 } from "@chakra-ui/react";
-import Header from "../Header";
+import Header from "../Header/Header";
 import { CarteleraForm } from "./CarteleraForm";
 import { Clientes } from "./Clientes"
 

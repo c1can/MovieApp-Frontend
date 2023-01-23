@@ -15,7 +15,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { useLocation } from "wouter";
 import API_URL from "../variables/api";
-import Header from "./Header";
+import Header from "./Header/Header";
 
 export function Register() {
 

@@ -1,5 +1,5 @@
 import { Cartelera } from "./Cartelera";
-import Header from "./Header";
+import Header from "./Header/Header";
 
 export function Home() {
     return (

@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import Header from "./Header";
+import Header from "./Header/Header";
 import API_URL from "../variables/api";
 
 export function Login() {

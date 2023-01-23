@@ -2,7 +2,7 @@ import { Container, Text, TableContainer, Th, Table, Thead, Tr, Tbody, Td } from
 import { useEffect, useState } from "react";
 import { useStorage } from "../hooks/useStorage";
 import API_URL from "../variables/api";
-import Header from "./Header";
+import Header from "./Header/Header";
 
 export function Reservaciones(){
 

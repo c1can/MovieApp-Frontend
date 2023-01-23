@@ -1,7 +1,7 @@
 import { Box, Container, useMediaQuery } from "@chakra-ui/react";
 import { AsientosContextProvider } from "../../Context/asientosContext";
 import { useMoviesContext } from "../../hooks/useMoviesContext";
-import Header from "../Header";
+import Header from "../Header/Header";
 import { Asientos } from "./Asientos";
 import { Detalles } from "./Detalles";
 
