@@ -6,7 +6,7 @@ export function Register() {
   return (
     <>
       <Header />
-      <Container maxW={"container.lg"} mt="100px">
+      <Container maxW={"container.lg"} mt="50px">
         <Center flexDirection="column">
           <Heading>Registrate</Heading>
           <Text

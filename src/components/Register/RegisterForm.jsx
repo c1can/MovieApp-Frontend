@@ -13,7 +13,7 @@ export function RegisterForm() {
   const { handleChange, handleSubmit } = useRegister();
 
   return (
-    <Box minW={"50%"} px="6" py="10" borderRadius={"lg"} shadow="lg" bg="white">
+    <Box minW={"50%"} px="6" py="10" borderRadius={"lg"} shadow="lg" bg="white" mb={'30px'}>
       <Box
         as="form"
         display="flex"
