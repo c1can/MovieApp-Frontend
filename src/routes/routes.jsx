@@ -3,7 +3,7 @@ import { BuyTicket } from "../components/BuyTicket/BuyTicket"
 import { Home } from "../components/Home"
 import { Reservaciones } from "../components/Reservaciones/Reservaciones"
 import { Register } from "../components/Register/Register"
-import { Login } from "../components/Login"
+import { Login } from "../components/Login/Login"
 import { Admin } from "../components/Admin_/Admin"
 import { ProtectedRoute } from "../components/ProtectedRoute"
 
