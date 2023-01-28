@@ -105,12 +105,12 @@ export function useHandleButton(movies, id) {
        })
        await changeCreditos.json()
 
-       const reloadUser = await fetch(`${API_URL}/clientes/${user._id}`)
-       const reloadUserResponse = await reloadUser.json()
-       window.localStorage.setItem('user', JSON.stringify(reloadUserResponse))
+       const newEditedUser = await fetch(`${API_URL}/clientes/${user._id}`)
+       const newUserResponse = await newEditedUser.json()
+       window.localStorage.setItem('user', JSON.stringify(newUserResponse)) 
        setTimeout(() => {
         window.location.reload(true)
-       }, 1500)
+       }, 1000)
 
      } catch (error) {
       console.log(error)
