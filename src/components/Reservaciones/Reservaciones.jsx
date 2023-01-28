@@ -1,5 +1,4 @@
-import { Container, Text } from "@chakra-ui/react";
-import { useReservaciones } from "../../hooks/Reservaciones/useReservaciones";
+import { Center, Container, Text } from "@chakra-ui/react";
 import { useStorage } from "../../hooks/useStorage";
 import Header from "../Header/Header";
 import { Factura } from "./Factura";
@@ -7,7 +6,6 @@ import { Factura } from "./Factura";
 export function Reservaciones(){
     const { getStorage } = useStorage()
     const user = getStorage()
-    const { facturas } = useReservaciones(user)
 
     return (
         <>
@@ -15,8 +13,11 @@ export function Reservaciones(){
         <Container maxW='container.xl'>
             {
                 user.rol == 'anonimo' 
-                ? <Text>Registrate para poder ver tus reservaciones</Text>
-                : <Factura facturas={facturas}/>
+                ? 
+                <Center h="200px">
+                    <Text fontSize={'xl'}>Registrate para poder ver tus reservaciones</Text>
+                </Center>
+                : <Factura user={user}/>
             }
         </Container>
         </>

@@ -1,7 +1,11 @@
 import { TableContainer, Th, Table, Thead, Tr, Tbody, Td, Text } from "@chakra-ui/react";
+import { useReservaciones } from "../../hooks/Reservaciones/useReservaciones";
 
 
-export function Factura({ facturas }) {
+export function Factura({ user }) {
+
+    const { facturas } = useReservaciones(user)
+
     return (
         <>
             {

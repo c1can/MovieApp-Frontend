@@ -38,7 +38,7 @@ export function Detalles({ movies, id }) {
               <Text fontSize="2xl">Precio: {movie.precio} creditos</Text>
             </Box>
             <Box display="flex" gap="2">
-              <Text fontSize="2xl">Horararios:</Text>
+              <Text fontSize="2xl">Hora:</Text>
               <Box className="horas" display="flex" gap={2} alignItems="center">
                 {movie.horarios.map((hour, index) => (
                   <Badge fontSize={"sm"} key={index}>
