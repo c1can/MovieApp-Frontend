@@ -16,7 +16,7 @@ export function Factura({ user }) {
                                 <Tr>
                                     <Th color="yellow">Fecha</Th>
                                     <Th color="yellow">Pelicula</Th>
-                                    <Th color="yellow">Asientos</Th>
+                                    <Th color="yellow">Asiento</Th>
                                     <Th color={"lightgreen"} isNumeric>Total</Th>
                                 </Tr>
                                 </Thead>

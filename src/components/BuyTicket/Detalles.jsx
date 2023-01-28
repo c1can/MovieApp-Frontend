@@ -41,7 +41,7 @@ export function Detalles({ movies, id }) {
               <Text fontSize="2xl">Hora:</Text>
               <Box className="horas" display="flex" gap={2} alignItems="center">
                 {movie.horarios.map((hour, index) => (
-                  <Badge fontSize={"sm"} key={index}>
+                  <Badge fontSize={"lg"} key={index}>
                     {hour.hora}
                   </Badge>
                 ))}
