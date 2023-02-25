@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { useStorage } from "../useStorage";
-import API_URL from "../../variables/api";
 
 export function useCartelera() {
     const [newMovie, setMovie] = useState({
@@ -27,7 +26,7 @@ export function useCartelera() {
     
       const handleCarteleraSubmit=(e) => {
         e.preventDefault()
-        fetch(`${API_URL}/cartelera`, {
+        fetch(`${import.meta.env.VITE_API_URL}/cartelera`, {
             method: 'POST',
             mode: 'cors',
             headers: {

@@ -1,7 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import { useStorage } from "../../useStorage";
 import { useAsientosContext } from "../useAsientosContext";
-import API_URL from "../../../variables/api";
 
 export function useHandleButton(movies, id) {
     const { asientos } = useAsientosContext()
@@ -57,7 +56,7 @@ export function useHandleButton(movies, id) {
      const valorRestante = user.creditos - (asientos.length * 100)
      
      try {
-       const reserve = await fetch(`${API_URL}/cartelera/reservar/${id}`, {
+       const reserve = await fetch(`${import.meta.env.VITE_API_URL}/cartelera/reservar/${id}`, { //Llama de tipo put para editar los asientos
         method: 'PUT',
         mode: 'cors',
         headers: {
@@ -74,7 +73,7 @@ export function useHandleButton(movies, id) {
         duration: 1000
        })
 
-       const addBill = await fetch(`${API_URL}/facturacion`, {
+       const addBill = await fetch(`${import.meta.env.VITE_API_URL}/facturacion`, { //Llamada de tipo post para añadir al usuario actual su factura
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -95,7 +94,7 @@ export function useHandleButton(movies, id) {
        const billResponse = await addBill.json()
        await billResponse
 
-       const changeCreditos = await fetch(`${API_URL}/clientes/${user._id}`, {
+       const changeCreditos = await fetch(`${import.meta.env.VITE_API_URL}/clientes/${user._id}`, { //Llamada de tipo put al cliente actual para restarle los creditos
         method: 'PUT',
         mode: 'cors',
         headers: {
@@ -105,7 +104,7 @@ export function useHandleButton(movies, id) {
        })
        await changeCreditos.json()
 
-       const newEditedUser = await fetch(`${API_URL}/clientes/${user._id}`)
+       const newEditedUser = await fetch(`${import.meta.env.VITE_API_URL}/clientes/${user._id}`) //llamada al cliente para actualizar el localStorage
        const newUserResponse = await newEditedUser.json()
        window.localStorage.setItem('user', JSON.stringify(newUserResponse)) 
        setTimeout(() => {

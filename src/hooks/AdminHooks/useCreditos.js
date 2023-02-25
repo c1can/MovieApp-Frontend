@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import { useToast } from "@chakra-ui/react";
-import API_URL from "../../variables/api";
 import { useStorage } from "../useStorage";
 
 export function useCreditos() {
@@ -23,7 +22,7 @@ export function useCreditos() {
     e.preventDefault();
     const id = clientId;
     fetch(
-      `${API_URL}/clientes/${id}`,
+      `${import.meta.env.VITE_API_URL}/clientes/${id}`,
       {
         method: "PUT",
         mode: "cors",

@@ -1,5 +1,4 @@
 import { useStorage } from "../../hooks/useStorage"
-import API_URL from "../../variables/api"
 
 export const getClientes = () => {
     const { getStorage } = useStorage()
@@ -7,7 +6,7 @@ export const getClientes = () => {
     const { token } = logAdmin
 
 
-    return fetch(`${API_URL}/clientes`, {
+    return fetch(`${import.meta.env.VITE_API_URL}/clientes`, {
         method: 'GET',
         headers: new Headers({
             'x-access-token': token

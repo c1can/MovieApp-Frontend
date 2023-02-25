@@ -1,4 +1,3 @@
-import API_URL from "../../variables/api"
 import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useLocation } from "wouter";
@@ -22,7 +21,7 @@ export function useLogin() {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    fetch(`${API_URL}/login`, {
+    fetch(`${import.meta.env.VITE_API_URL}/login`, {
       method: 'POST',
       mode: 'cors',
       headers: {
