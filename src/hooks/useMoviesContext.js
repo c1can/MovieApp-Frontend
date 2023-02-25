@@ -2,8 +2,8 @@ import { moviesContext } from "../Context/moviesContext";
 import { useContext } from "react";
 
 export function useMoviesContext() {
-    const { movies } = useContext(moviesContext)
+    const { movies, loading } = useContext(moviesContext)
 
 
-    return { movies }
+    return { movies, loading }
 }

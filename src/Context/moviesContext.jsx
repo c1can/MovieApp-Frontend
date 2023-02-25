@@ -6,16 +6,21 @@ export const moviesContext = createContext({})
 
 export function MoviesContextProvider({ children }) {
     const [movies, setMovies] = useState([])
+    const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
+        setLoading(true)
         getCartelera()
-            .then(res => setMovies(res))
+            .then(res => {
+                setLoading(false)
+                setMovies(res)
+            })
     }, [])
 
 
     return(
-        <moviesContext.Provider value={{movies}}>
+        <moviesContext.Provider value={{movies, loading}}>
             {children}
         </moviesContext.Provider>
     )
