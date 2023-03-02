@@ -13,8 +13,8 @@ export function MoviesContextProvider({ children }) {
         setLoading(true)
         getCartelera()
             .then(res => {
-                setLoading(false)
                 setMovies(res)
+                setLoading(false)
             })
     }, [])
 
