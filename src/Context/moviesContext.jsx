@@ -16,6 +16,7 @@ export function MoviesContextProvider({ children }) {
                 setMovies(res)
                 setLoading(false)
             })
+            .catch(() => setLoading(false))
     }, [])
 
 
